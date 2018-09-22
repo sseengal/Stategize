@@ -1,0 +1,115 @@
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+<!-- Linking Stylesheet-->
+<?!= include("myStylesheet") ?>
+
+<body>
+  
+  <div class="myPadding">
+  <a onclick="google.script.run.launchAnythingSUS()">< Back</a>
+  
+  <h3>Setup</h3>
+  
+  <label id="clLabel">Confidence Level(%)</label>
+  <div class="block">
+  <input id="clField" type="number" value=95 min=1 max=99>
+  </div>
+  <hr/>
+
+  <h3>Range selection</h3>
+  <p>You can select the range with your mouse and click 'update range'to ready the test. In case multiple columns are selected, only the first two columns will be used.</p>
+  <div class="block">
+  <input id="sheetField" type="text" placeholder="Sheet name">
+  <input id="rangeField" type="text" placeholder="B2:C10">
+  </div>
+  <div class="block">
+  <button title="This will update the range of the data to be tested as per your selection." class="Action" onclick="updateRange()">Update range</button>
+  </div>
+  <hr/>
+
+  <div class="block">
+  <button title="The range selected above will be used to run the test." class="action" id="runTestButton" onclick="runTest()" disabled>Run Test</button>
+  </div>
+  <hr/>
+  
+ <div class="block">
+ <H3>Results:</H3>
+ <p id="testResult">result will be displayed here</p>
+ </div>
+
+  
+    
+<!-- Footer -->  
+<div class="myFooter">
+  <span class="gray">
+    Stategize.co</span>
+</div>
+
+</div>
+</body>
+
+<!-- Javascript Start -->
+
+<!-- Javascript to update Range Field -->
+
+<script type="text/javascript">
+
+
+
+    
+    //Initializing Valid Range Object. This will contain the range notation and sheet Index. It will be passed to runPairedTTest()
+    var validRange = {};
+    
+    // Get Range and update field with selected range after clicking update range button
+    function updateRange() {
+      google.script.run.withSuccessHandler(getRangeSuccess).getRange();
+      function getRangeSuccess(range) {
+      
+        document.getElementById("rangeField").value = range.A1Notation;
+        document.getElementById("sheetField").value = range.sheetName;
+        document.getElementById("runTestButton").disabled=false;
+        
+        console.log("Range updated");
+        
+      }
+      
+    } 
+    
+    // Run the Paired T Test
+    function runTest() {
+    
+    
+    // Get inputs Confidence Level and Range.
+    var cl = document.getElementById("clField").value;
+    var rangeToCheck = document.getElementById("rangeField").value;
+    var sheetIndex = document.getElementById("sheetField").value;
+
+    //Validate Inputs
+    google.script.run.withSuccessHandler(checkInputs).checkInputs(cl, rangeToCheck, sheetIndex);
+    
+    function checkInputs(result) {
+     if (result == 0) {
+      console.log("invalid inputs");
+     }
+     // If input okay, run Paired T Test
+    else if (result == 1) {
+      console.log("Running Paired T Test");
+ 
+      google.script.run.withSuccessHandler(runTestSuccess).runPairedTTest(cl, rangeToCheck, sheetIndex);
+      
+      function runTestSuccess(result) {
+        console.log("hello");
+        document.getElementById("testResult").innerHTML = "You can be <b>" + Math.round(result.scoreDiff * 100) / 100 + "%</b> sure that the scores are different.<br>You can be <b>" + cl + "%</b> sure that the actual difference between the scores is from <b>" + Math.round(result.lLim * 100) / 100 + "%</b> upto <b>" + Math.round(result.uLim * 100) / 100 + "%</b>." ;
+      }
+      
+     
+      
+    } //close runPairedTTest
+   } //close Check Inputs
+    
+   } //close Run Test
+    
+         
+</script>
+
+

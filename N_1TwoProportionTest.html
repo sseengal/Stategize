@@ -1,0 +1,104 @@
+
+
+  <!-- Range Form Start -->
+  <div class="block">
+  <p> You can select the data with your mouse and click 'Update range'.</p>
+  </div>
+
+  <div class="block">
+  <label id="A">A</label>
+  <input id="casesA" type="number" min=1>
+  <p>out of</p>
+  <input id="totalA" type="number" min=1>
+  </div>
+  
+  <div class="block">
+  <label id="B">B</label>
+  <input id="casesB" type="number" min=1>
+  <p>out of</p>
+  <input id="totalB" type="number" min=1>
+  </div>
+  
+  <div class="block">
+  <label id="clLabel">Confidence Level</label>
+  <input id="clField" type="number" value=95 min=1 max=99>
+  </div>
+  
+
+  <!--
+  <h6>Extra columns will be removed before testing. For more info on paired t-test, <a href="https://wp.me/p9w6BW-3I" target="_blank">see an example</a> on <a href="https://stategize.co" target="_blank">Stategize.co</a></h6>
+  -->
+  <div class="block">
+  <button class="blue" id="runTestButton" onclick="runTest()">Run Test</button>
+  </div>
+
+ <div class="block">
+ <button onclick="google.script.run.showSidebar()">Back</button>
+ </div>
+
+ <div class="block">
+ <p id="testResult">result will be displayed here</p>
+ </div>
+
+
+
+<!-- Footer -->
+<div class="sidebar bottom">
+  <span class="gray">
+    Stategize.co</span>
+</div>
+
+
+<!-- Javascript Start -->
+
+<!-- Javascript to update Range Field -->
+
+<script type="text/javascript">
+
+
+
+
+    //Initializing Valid Range Object. This will contain the range notation and sheet Index. It will be passed to runPairedTTest()
+    var validRange = {};
+
+
+    function runTest() {
+
+
+    // Get inputs
+    var cl = document.getElementById("clField").value;
+    var casesA = document.getElementById("casesA").value;
+    var totalA = document.getElementById("totalA").value;
+    var casesB = document.getElementById("casesB").value;
+    var totalB = document.getElementById("totalB").value;
+
+
+    //Validate Inputs
+    google.script.run.withSuccessHandler(checkInputs).checkInputsN_1(cl, casesA, totalA, casesB, totalB);
+
+    function checkInputs(result) {
+     if (result == 0) {
+      console.log("invalid inputs");
+     }
+     // If input okay, run Test
+    else if (result == 1) {
+     
+      google.script.run.withSuccessHandler(runTestSuccess).runN_1TwoProportionTest(cl, casesA, totalA, casesB, totalB);
+
+      function runTestSuccess(result) {
+       
+        //document.getElementById("testResult").innerHTML = "You can be " + result.scoreDiff + "% sure that the average time to complete the task will be different than " + benchmark + ". You can be " + cl + "% sure that the median task times for all users will lie between " + result.lLim + "% upto " + result.uLim + "%." ;
+        document.getElementById("testResult").innerHTML = "Test Run" ;
+
+     }
+
+
+
+    } //close runPairedTTest
+   } //close Check Inputs
+
+   } //close Run Test
+
+
+
+</script>

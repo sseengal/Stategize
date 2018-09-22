@@ -1,0 +1,163 @@
+
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+
+
+<!-- Linking Stylesheet-->
+<?!= include("myStylesheet") ?>
+
+<body>
+
+<div class="myPadding">
+
+<a onclick="google.script.run.showSidebar()">< Back</a>
+
+
+    <h3>About</h3>
+    <p>SUS stands for the <b>System Usability Scale</b> which is a self reported metric to measure perceived usability. It is presented as part of a 10-item questionnaire. <a href="https://www.usability.gov/how-to-and-tools/methods/system-usability-scale.html" target="_blank">Read more</a> on the SUS. </p>
+    <hr/>
+        
+ 
+       
+       <!-- 
+        <div class="panel-heading accordion-toggle collapsed" style="overflow: hidden;" >
+          <h2">SUS Questionnaire</h2>
+          <i style="float:right;" class="material-icons">arrow_drop_down</i>
+        </div>
+          
+        
+        <div id="item1" class="collapse" style = "margin-top:5px; width:100%; height:100%;">
+            <p>Get the questionnaire via email and link it to your sheet to start performing tests. You can also create your own questionnaire if you like.</p>
+            <p><a target="_blank" href="https://support.google.com/docs/answer/2917686?hl=en"> See how to link a google form to a sheet.</a></p>
+            <button class="action" onclick="emailSUSForm()">Get SUS Form</button>
+            <p id="emailNotify"></p>
+        </div>
+       </div> 
+       /*
+       
+       
+       <h3>What should be my sample size?</h3>
+        <p>Find the right sample size as per the chance of observing and the probability of occurence of a problem.</p>
+        <button class="action" onclick="google.script.run.launchSampleSizeCalculator();">Launch sample size calculator</button>
+        <hr/>
+-->
+        
+
+           <h3>Sample SUS Sheet</h3>
+  
+
+
+           <p>Open a sample SUS sheet in the active spreadsheet if you already have the data available.</p>
+           <p>Note: Rename the new sheets when you create them. There can't be two sheets of the default name.</p>
+           <button class="action" title="This will open a new a new sheet with name New SUS sheet." onclick="google.script.run.newSUSSheet();">Sample SUS sheet</button>
+
+<hr/>
+           <h3>SUS Calculator</h3>
+          <p>Calculator with Cronbach internal reliability check to calculate SUS scores of users.</p>
+          <button class="action" onclick="google.script.run.launchSUSCalculator();">Launch Calculator</button>
+      <hr/>
+        
+  
+           <h3>One sample t test</h3>
+ 
+          <p>Compare SUS scores to a benchmark.</p>
+        <button class="action" onclick="google.script.run.launchOneSampleTTest()">Launch test</button>
+       
+       <hr/>
+       
+       
+      <h3>Two sample t test</h3>
+       <p>Compare SUS scores when different sets of users are tested.</p>
+          <button class="action" onclick="google.script.run.launchTwoSampleTTest()">Launch test</button>
+        
+     <hr/>     
+     
+       
+          <h3>Paired t test</h3>
+        <p>Compare SUS scores when the same sets of users are tested.</p>
+          <button class="action" onclick="google.script.run.launchPairedTTest()">Launch test</button>
+    
+   <hr/>     
+        
+ 
+  <!--
+
+    <div class="tab blue">
+      <input id="tab-four" type="checkbox" name="tabs2">
+      <label for="tab-four">One Sample T (Log) Test</label>
+      <div class="tab-content">
+        <p>A one sample t test is used when testing tasktimes against a benchmark.</p>
+        <p>Data type: <b>Continuous(task times)</b></p>
+         <p>Test type: <b>Benchmark</b></p>
+         <button class="blue" onclick="google.script.run.launchOneSampleTLogTest()">Launch Test</button>
+      </div>
+    </div>
+
+    <div class="tab blue">
+      <input id="tab-five" type="checkbox" name="tabs2">
+      <label for="tab-five">N-1 Two Proportion Test</label>
+      <div class="tab-content">
+        <p>N-1 Two Proportion Test can be used when you want to compare two sets of users having different users in each group.</p>
+        <p>Data type: <b>Discrete Binary</b></p>
+        <p>Test type: <b>Comparison</b></p>
+        <button class="blue" onclick="google.script.run.launchN_1TwoProportionTest()">Launch Test</button>
+      </div>
+    </div>
+
+    <div class="tab blue">
+      <input id="tab-six" type="checkbox" name="tabs2">
+      <label for="tab-six">SUS calculator</label>
+      <div class="tab-content">
+        <p>Standard SUS calculator</p>
+        <button class="blue" onclick="google.script.run.launchSUSCalculator()">Launch Test</button>
+      </div>
+    </div>
+    
+ -->
+ 
+  <div class="myFooter">
+  <span class="gray">
+    Stategize.co</span>
+  </div>
+  
+ </div> 
+
+</body>
+
+<!-- 
+
+
+-->
+
+
+
+ <script type="text/javascript">
+ 
+ 
+ function emailSUSForm() {
+ 
+ google.script.run.withSuccessHandler(emailNotify).emailGoogleForm();
+ 
+ function emailNotify(result) {
+ 
+            document.getElementById("emailNotify").innerHTML = "Email with the SUS questionnaire has been sent to: <b>" + result.email + "</b>";
+ 
+ 
+ }
+ 
+ 
+ }
+ 
+ </script>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+<!-- Linking Stylesheet-->
+<?!= include("myStylesheet") ?>
+
+  
+<div class="myPadding">
+  <a onclick="google.script.run.showSidebar()">< Back</a>
+  <h3>About</h3>
+  <p>This is a sample size calculator which uses the logic behind <b>"5 is the magic number for usability testing"</b>.  <a href="https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/" target="_blank">Read more</a> about it.</p>
+  <hr/>
+  <div class="block">
+   <p>I want to have a </p>
+   <input id="chanceToObserve" type="number" value=85 min=1 max=99>
+  </div>
+  <p> % chance to observe, atleast once, problems that have a probability of occurence of </p>
+  <input id="probabilityOfOccurrence" type="number" value=35 min=1 max=99>
+  <p>%. </p>
+
+
+  <button class="action" id="findTestButton" onclick="calculateProblemDiscoverySampleSize()">Calculate Sample Size</button>
+ 
+<hr/>
+ <H3>Sample Size:</H3>
+ <div class="block">
+ <p id="testResult">Results will be displayed here</p>
+ </div>
+
+<div class="myFooter">
+  <span class="gray">
+    Stategize.co</span>
+</div>
+  </div> 
+ 
+<!-- Footer -->  
+
+
+ 
+ <script type="text/javascript">
+   
+    function calculateProblemDiscoverySampleSize() {
+    
+    var chanceToObserve = document.getElementById("chanceToObserve").value;
+    var probabilityOfOccurrence = document.getElementById("probabilityOfOccurrence").value;
+   
+    google.script.run.withSuccessHandler(getTestSuccess).getProblemDiscoverySampleSize(chanceToObserve, probabilityOfOccurrence);
+    function getTestSuccess(result) {
+     document.getElementById("testResult").innerHTML = result;
+     }
+    }
+    
+
+</script>
