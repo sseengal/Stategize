@@ -3,12 +3,12 @@
 <!-- Linking Stylesheet-->
 <?!= include("myStylesheet") ?>
 
-  
-<body>  
+
+<body>
   <div class="myPadding">
   <a onclick="google.script.run.launchAnythingSUS()">< Back</a>
 
-  
+
   <h3>Select range</h3>
   <p>You can use the mouse to select range. Note: There should be 10 columns for the 10 items in the SUS questionnaire. Each item should be an integer between 1-5.</p>
   <div class="block">
@@ -18,7 +18,7 @@
   <div class="block">
   <button title="This will update the range of the data to be tested as per your selection." class="Action" onclick="updateRange()">Update range</button>
   </div>
-  
+
   <hr/>
   <h3>Cell to show SUS scores (Optional) </h3>
   <div class="block">
@@ -28,29 +28,29 @@
   <div class="block">
   <button id="updateCellButton" title="This will update the range of the data to be tested as per your selection." class="Action" onclick="updateCell()" disabled>Update cell</button>
   </div>
- 
-  
+
+
   <hr/>
   <button title="The range selected above will be used to run the test." class="action" id="runTestButton" onclick="runTest()" disabled>Run Test</button>
   <hr/>
-  
+
  <div class="block">
  <H3>Results:</H3>
  <p id="testResult">result will be displayed here</p>
  </div>
 
-   
+
   <div class="myFooter">
   <span class="gray">
     Stategize.co</span>
   </div>
-  
+
   </div>
- 
+
  </body>
- 
+
  <script type="text/javascript">
- 
+
   var isCellUpdated = false;
 
     // Get Range and update field with selected range after clicking update range button
@@ -64,50 +64,50 @@
         document.getElementById("updateCellSheetField").disabled=false;
         document.getElementById("updateCellA1Field").disabled=false;
         document.getElementById("updateCellButton").disabled=false;
-       
+
 
         console.log("Range updated");
 
       }
 
     }
-    
-    
+
+
       function updateCell() {
       google.script.run.withSuccessHandler(getRangeSuccess).getCell();
       function getRangeSuccess(cell) {
-      
+
         document.getElementById("updateCellSheetField").value=cell.sheetName;
         document.getElementById("updateCellA1Field").value=cell.A1Notation;
         isCellUpdated = true;
 
 
       }
-      
+
   }
 
-    
 
-    
+
+
     function runTest() {
- 
-    
+
+
     google.script.run.withSuccessHandler(runTestSuccess).runSUSCalculator();
-    
+
     function runTestSuccess(result) {
             console.log("Stategized");
             document.getElementById("testResult").innerHTML = "Internal Reliability is: <b>" + Math.round(result.cronbach*100)/100 + "</b>.<br>SUS is: <b>" + Math.round(result.meanSUS*100)/100 + "</b>";
             if (isCellUpdated) {
             var a1Notation= document.getElementById("updateCellA1Field").value
-            google.script.run.withSuccessHandler(showSUSSuccess).showSUS(a1Notation);
+            google.script.run.withSuccessHandler(showSUSSuccess).showSUSColumnManual(a1Notation);
             function showSUSSuccess() {
-            console.log("Show Cell values");
+            //  console.log("Show Cell values");
             }
-            
+
             }
 
     }
-    
+
     }
-    
+
 </script>

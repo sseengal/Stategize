@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+<!-- Linking Stylesheet-->
+<?!= include("myStylesheet") ?>
+
+<body>
+  <div class="myPadding">
+    <a onclick="google.script.run.launchAnythingSUS()">< Back</a>
+
+
+    <h3>Setup</h3>
+    <p>1. <a onclick="emailSUSForm()" target="_blank">Get a copy</a> of the SUS questionnaire in Google Form by email.</p>
+    <p id="emailNotify"></p>
+    <p>2. Link the Google Form to your Google Sheets. <a href="https://support.google.com/docs/answer/2917686?hl=en" target="_blank">Read how.</a></p>
+    <p>3. Navigate to the linked Sheet in Google Sheets.<p>
+
+      <hr/>
+      <button title="The range selected above will be used to run the test." class="action" id="runTestButton" onclick="runTest()">Run Test</button>
+      <hr/>
+
+      <div class="block">
+        <H3>Results:</H3>
+        <p id="testResult">result will be displayed here</p>
+      </div>
+
+
+      <div class="myFooter">
+        <span class="gray">
+          Stategize.co</span>
+        </div>
+
+      </div>
+
+    </body>
+
+    <script type="text/javascript">
+
+    function runTest() {
+
+      google.script.run.withSuccessHandler(runTestSuccess).runAutoSUSCalculator();
+      function runTestSuccess(result) {
+        document.getElementById("testResult").innerHTML = "Internal Reliability is: <b>" +
+        Math.round(result.cronbach*100)/100
+        + "</b>.<br>SUS is: <b>" +
+        Math.round(result.meanSUS*100)/100
+        + "</b>";
+        google.script.run.showSUSColumnAuto();
+        }  
+      }
+
+
+
+    function emailSUSForm() {
+
+      google.script.run.withSuccessHandler(emailNotify).emailSUSForm();
+
+      function emailNotify(result) {
+
+        document.getElementById("emailNotify").innerHTML = "Email with the SUS questionnaire link has been sent to: <b>" + result.email + "</b>";
+
+
+      }
+
+
+    }
+
+    </script>

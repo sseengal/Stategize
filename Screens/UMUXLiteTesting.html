@@ -1,26 +1,38 @@
+
+
 <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
 
 <!-- Linking Stylesheet-->
 <?!= include("myStylesheet") ?>
 
-  
-<body>  
+<body>
+
   <div class="myPadding">
+  
   <a onclick="google.script.run.launchAnythingSUS()">< Back</a>
+  
+ 
+  <h3>Sample UMUX-Lite Sheet</h3>
+  <p>Open a sample SUS sheet in the active spreadsheet if you already have the data available.</p>
+  <p>Note: Rename the new sheets when you create them. There can't be two sheets of the default name.</p>
+  <button class="action" title="This will open a new a new sheet with name New UMUX-Lite sheet." onclick="google.script.run.newUMUXLiteSheet();">Sample UMUX-Lite sheet</button>
+
+<hr/>
+  
 
   
-  <h3>Select range</h3>
-  <p>You can use the mouse to select range. Note: There should be 10 columns for the 10 items in the SUS questionnaire. Each item should be an integer between 1-5.</p>
+  <h3>Range selection</h3>
+  <p>You can select the range with your mouse and click 'update range' to ready the test. In case multiple columns are selected, only the first column will be used.</p>
   <div class="block">
   <input id="sheetField" type="text" placeholder="Sheet name">
-  <input id="rangeField" type="text" placeholder="B5:K8">
+  <input id="rangeField" type="text" placeholder="B2:C10">
   </div>
   <div class="block">
   <button title="This will update the range of the data to be tested as per your selection." class="Action" onclick="updateRange()">Update range</button>
   </div>
-  
   <hr/>
-  <h3>Cell to show SUS scores (Optional) </h3>
+  
+  <h3>Cell to show SUS scores column when converted from UMUX-Lite (Optional) </h3>
   <div class="block">
   <input id="updateCellSheetField" type="text" placeholder="Sheet name" disabled>
   <input id="updateCellA1Field" type="text" placeholder="A1" disabled>
@@ -28,9 +40,8 @@
   <div class="block">
   <button id="updateCellButton" title="This will update the range of the data to be tested as per your selection." class="Action" onclick="updateCell()" disabled>Update cell</button>
   </div>
- 
-  
   <hr/>
+ 
   <button title="The range selected above will be used to run the test." class="action" id="runTestButton" onclick="runTest()" disabled>Run Test</button>
   <hr/>
   
@@ -92,16 +103,16 @@
     function runTest() {
  
     
-    google.script.run.withSuccessHandler(runTestSuccess).runSUSCalculator();
+    google.script.run.withSuccessHandler(runTestSuccess).runUMUXLiteCalculator();
     
     function runTestSuccess(result) {
             console.log("Stategized");
-            document.getElementById("testResult").innerHTML = "Internal Reliability is: <b>" + Math.round(result.cronbach*100)/100 + "</b>.<br>SUS is: <b>" + Math.round(result.meanSUS*100)/100 + "</b>";
+            document.getElementById("testResult").innerHTML = "Average SUS scores from UMUX-Lite is <b>" + Math.round(result.meanSUS*100)/100 + "</b>";
             if (isCellUpdated) {
             var a1Notation= document.getElementById("updateCellA1Field").value
             google.script.run.withSuccessHandler(showSUSSuccess).showSUS(a1Notation);
             function showSUSSuccess() {
-            console.log("Show Cell values");
+            //console.log("Show Cell values");
             }
             
             }

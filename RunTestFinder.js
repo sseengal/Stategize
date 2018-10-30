@@ -14,7 +14,7 @@ function getTest(data, test, users, groups) {
                   return 'Two-Sample t Test'
                   break;
               }
-              
+
             case 'same':
                switch (groups) {
                 case 'morethanthree':
@@ -24,10 +24,10 @@ function getTest(data, test, users, groups) {
                   return 'Paired t Test'
                   break;
               }
-              
+
           }
-          
-      case 'correlation': 
+
+      case 'correlation':
           return 'Correlation and Regression Test'
       case 'benchmark':
           switch (users) {
@@ -61,7 +61,7 @@ function getTest(data, test, users, groups) {
                   return 'N-1 Two Proportion Test and Fisher Exact Test'
                   break;
               }
-              
+
             case 'same':
                switch (groups) {
                 case 'morethanthree':
@@ -71,17 +71,15 @@ function getTest(data, test, users, groups) {
                   return 'McNemar Exact Test'
                   break;
               }
-              
+
           }
-          
-      case 'correlation': 
+
+      case 'correlation':
           return 'Phi Correlation Test'
       case 'benchmark':
          return 'One-Sample Binomial or One-Sample z Test';
       case 'baseline':
           return 'Adjusted Wald Confidence Interval Test';
-      }    
+      }
   }
 }
-
-

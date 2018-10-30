@@ -31,95 +31,6 @@ function showSidebar() {
 //LAUNCH TESTS
 
 
-function launchPairedTTest() {
-  var html = HtmlService.createTemplateFromFile('Screens/PairedTTest.html').evaluate()
-      .setTitle('Paired T Test')
-      .setWidth(300);
-  SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
-      .showSidebar(html);
-  
-}
-
-function launchTwoSampleTTest() {
-  var html = HtmlService.createTemplateFromFile('Screens/TwoSampleTTest.html').evaluate()
-      .setTitle('Two Sample T Test')
-      .setWidth(300);
-  SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
-      .showSidebar(html);
-
-}
-
-function launchOneSampleTTest() {
-  var html = HtmlService.createTemplateFromFile('Screens/OneSampleTTest.html').evaluate()
-      .setTitle('One Sample T Test')
-      .setWidth(300);
-  SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
-      .showSidebar(html);
-
-}
-
-function launchOneSampleTLogTest() {
-  var html = HtmlService.createTemplateFromFile('Screens/OneSampleTLogTest.html').evaluate()
-      .setTitle('One Sample T (Log) Test')
-      .setWidth(300);
-  SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
-      .showSidebar(html);
-
-}
-
-
-function launchN_1TwoProportionTest() {
-  var html = HtmlService.createTemplateFromFile('Screens/N_1TwoProportionTest.html').evaluate()
-      .setTitle('N-1 Two Proportion Test')
-      .setWidth(300);
-  SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
-      .showSidebar(html);
-
-}
-
-  function launchAnythingSUS() {
-  var html = HtmlService.createTemplateFromFile('Screens/AnythingSUS.html').evaluate()
-      .setTitle('Anything SUS')
-      .setWidth(300);
-  SpreadsheetApp.getUi() 
-      .showSidebar(html);
-  
- 
-}
-
-
-  function launchSUSCalculator() {
-  var html = HtmlService.createTemplateFromFile('Screens/SUSCalculator.html').evaluate()
-      .setTitle('SUS Calculator')
-      .setWidth(300);
-  SpreadsheetApp.getUi() 
-      .showSidebar(html);
-  
- 
-}
-
-function launchProblemDiscoverySampleSize() {
-  var html = HtmlService.createTemplateFromFile('Screens/ProblemDiscoverySampleSize.html').evaluate()
-      .setTitle('Problem Discovery Sample Size')
-      .setWidth(300);
-  SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
-      .showSidebar(html);
-  
-}
-
-
-
-
-function launchTestFinder() {
-  var html = HtmlService.createTemplateFromFile('Screens/TestFinder.html').evaluate()
-      .setTitle('Test finder tool')
-      .setWidth(300);
-  SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
-      .showSidebar(html);
-  
-}
-
-
 var columns = [];
 
 /*
@@ -140,35 +51,36 @@ documentProperties.setProperty('RANGE_TO_TEST', JSON.stringify(rangeValues));
 function testPropertyGet() {
   var documentProperties = PropertiesService.getDocumentProperties();
   var values = JSON.parse(documentProperties.getProperty('RANGE_TO_TEST'));
-  
+
   //var column1;
-  
+
   extractColumns(values);
   //Logger.log("Column1 " + column1);
 }
 
+
 function getRange() {
-  
+
   var rangeValues = [];
 
   var sheet = SpreadsheetApp.getActiveSheet();
-  
+
   var A1Notation = sheet.getActiveRange().getA1Notation();
   Logger.log("A1="+ A1Notation);
-  
+
   var sheetIndex = sheet.getIndex();
-  
+
   var sheetName = sheet.getSheetName();
-  
+
   //Get range and cell when user hits update
   rangeValues = sheet.getActiveRange().getValues();
   //var cell = sheet.getSelection().getCurrentCell().getA1Notation();
-  
+
   //Logger.log("cell is" + cell);
-  
+
   PropertiesService.getDocumentProperties().setProperty('RANGE_TO_TEST', JSON.stringify(rangeValues));
- 
-  
+
+
   return {
     A1Notation: A1Notation,
     sheetIndex: sheetIndex,
@@ -179,19 +91,19 @@ function getRange() {
 
 function getCell() {
   var cell = {};
-  
+
   var sheet = SpreadsheetApp.getActiveSheet();
-  
+
   cell.sheetName = sheet.getSheetName();
 
   cell.A1Notation = sheet.getSelection().getCurrentCell().getA1Notation();
-  
+
   cell.Row = sheet.getSelection().getCurrentCell().getRow();
-  
+
   cell.Column = sheet.getSelection().getCurrentCell().getColumn();
-  
+
   PropertiesService.getDocumentProperties().setProperty('ANSWER_CELL', cell);
- 
+
   return cell;
 }
 
@@ -201,7 +113,7 @@ function getCell() {
 function checkInputs(cl, range, sheetIndex) {
   if ((cl<= 0 || cl>=100) || (range == "")) {
    return 0;
-  }   
+  }
   else return 1;
 }
 
@@ -221,9 +133,9 @@ function checkInputs(cl, range, sheetIndex) {
 //  * using a form POST request - which can't happen in HtmlService.
 //  *
 //  * @param {Object} token from checkout.js
-//  * @return {number} HTTP Response code 
+//  * @return {number} HTTP Response code
 //  */
-// function processCharge(token) { 
+// function processCharge(token) {
 
 
 // var tokenId = token.id;
@@ -233,19 +145,19 @@ function checkInputs(cl, range, sheetIndex) {
 
 // var path = "/customers";
 // var customer = Stripe_PostRequest(path, [], [], {
-//   "description": "test customer", 
+//   "description": "test customer",
 //   "source": tokenId,
 //   "email": stripeEmail
 // });
 
-  
+
 // var custId = JSON.parse( customer.getContentText() ).id;
 
 
 // // Create a Charge
 // path = "/charges";
 // var charge = Stripe_PostRequest(path, [], [], {
-//    "currency": "usd", 
+//    "currency": "usd",
 //    "amount": "500",
 //    "customer": custId
 // });
@@ -258,8 +170,8 @@ function checkInputs(cl, range, sheetIndex) {
 //  * Provided by Stripe support
 //  *
 //  * @param {string} path
-//  * @param {Object} parameters 
-//  * @return {HTTPResponse} 
+//  * @param {Object} parameters
+//  * @return {HTTPResponse}
 //  */
 // var Stripe_PostRequest = function(path, fields, expandableFields, parameters) {
 //   // Expand related fields when accessing sub-properties
@@ -286,7 +198,7 @@ function checkInputs(cl, range, sheetIndex) {
 //     }
 //   };
 //   var url = "https://api.stripe.com/v1" + path + serializeQueryString(parameters);
-//   return UrlFetchApp.fetch(url, options); 
+//   return UrlFetchApp.fetch(url, options);
 // }
 
 // /**
@@ -311,38 +223,35 @@ function checkInputs(cl, range, sheetIndex) {
 
 
 
-/*
+
 
 //FORM COPY ATTEMPT
 
 
-function emailGoogleForm() {
-  
-  
+function emailSUSForm() {
+
+
   //Obtain the ID of the Google Form. Replace the ID below
   //Make sure your ID is enclosed in single quotations.
-  
-  var formId = '1mH7Rp_fRl7b9mvPas3Tmlk6ya5Xm5UXs3rVpG0P4cHQ'
-  
 
-  
-  //Press the run button in the toolbar. Looks like a sideways triangle. 
-  
- 
-  
-  
-  //DO NOT EDIT BELOW. LEAVE THE CODE ALONE! 
+  var formId = '1mH7Rp_fRl7b9mvPas3Tmlk6ya5Xm5UXs3rVpG0P4cHQ'
+
+
+
+  //Press the run button in the toolbar. Looks like a sideways triangle.
+
+
+
+
+  //DO NOT EDIT BELOW. LEAVE THE CODE ALONE!
   var form = DriveApp.getFileById(formId).makeCopy();
   var Url = form.getUrl();
   var email = form.getOwner().getEmail();
   var name = form.getOwner().getName();
-  GmailApp.sendEmail(email, name+' Your Google Form has been copied and created', 'Click on the link below to go to your Google Form.\n\n'+Url);
-  
+  GmailApp.sendEmail(email, name+' Your copy of the SUS Questionnaire has been created', 'Click on the link below to access it.\n\n'+Url);
+
   return {
     email: email
   }
-  
+
 }
-
-
-*/

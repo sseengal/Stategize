@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+<!-- Linking Stylesheet-->
+<?!= include("myStylesheet") ?>
+
+
+<div class="myPadding">
+  <a onclick="google.script.run.launchFormativeTesting()">< Back</a>
+  <h3>About</h3>
+  <p>Problem Discovery Matrix description</p>
+  <hr/>
+
+
+   <p>Total users </p>
+   <input id="totalUsers" type="number" value=5 min=1 max=99>
+
+  <p> Problems discovered </p>
+  <input id="problemsDiscovered" type="number" value=5 min=1 max=99>
+
+  <button class="action" id="buildMatrix" onclick="buildProblemDiscoveryMatrix();">Build Matrix</button>
+
+<hr/>
+ <!-- <H3>Sample Size:</H3>
+ <div class="block">
+ <p id="testResult">Results will be displayed here</p>
+ </div> -->
+
+<div class="myFooter">
+  <span class="gray">
+    Stategize.co</span>
+</div>
+  </div>
+
+<!-- Footer -->
+
+
+
+ <script type="text/javascript">
+
+    function buildProblemDiscoveryMatrix() {
+
+    var users = document.getElementById("totalUsers").value;
+    var problems = document.getElementById("problemsDiscovered").value;
+
+    google.script.run.withSuccessHandler(getTestSuccess).buildProblemDiscoveryMatrix(users, problems);
+    function getTestSuccess(result) {
+     document.getElementById("testResult").innerHTML = result;
+     }
+    }
+
+
+</script>

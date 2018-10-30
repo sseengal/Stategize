@@ -1,0 +1,52 @@
+
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+
+
+<!-- Linking Stylesheet-->
+<?!= include("myStylesheet") ?>
+
+<body>
+
+  <div class="myPadding">
+
+    <a onclick="google.script.run.launchUXBenchmarking()">< Back</a>
+    <h3>About</h3>
+    <p>About Task Level Benchmarking</p>
+    <hr/>
+
+
+<h3>Actual Time on Task</h3>
+<p>One sample t(log) test for benchmarking actual user task times.</p>
+<button class="action" title="This will open the one sample t(log) test." onclick="">Launch Actual Test</button>
+
+<h3>Keystroke level model (KLM)</h3>
+
+<p>A technique to estimate task times. List the sequence of keystroke-level actions the
+user must perform to accomplish a task, and then add up the times required by the actions.</p>
+
+<button class="action" title="This will open the keystroke level model test." onclick="">Launch KLM Test</button>
+<hr/>
+
+<h3>Task Completion</h3>
+
+<p>Info</p>
+
+<button class="action" title="This will open task completion benchmarking test." onclick="">Task Completion</button>
+<hr/>
+
+<h3>Post Task Questionnaires</h3>
+
+<p>Includes Single ease question and more.</p>
+
+<button class="action" title="This will open the post task questionnaire options." onclick="google.script.run.launchPostTaskQuestionnaires()">Post Task Questionnaires</button>
+<hr/>
+
+<div class="myFooter">
+  <span class="gray">
+    Stategize.co</span>
+  </div>
+
+</div>
+
+</body>

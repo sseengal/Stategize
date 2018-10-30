@@ -50,13 +50,13 @@ Math.sum = function sum(vector) {
 }
 
 Math.sumOfSquares = function sum_sq(vector) {
-  var sum = 0, 
+  var sum = 0,
       i = vector.length;
-  while (i--) 
+  while (i--)
    sum += Math.pow(vector[i], 2);
   return sum;
 }
- 
+
 
 Math.mean = function mean(vector) {
   return Math.sum(vector)*1/vector.length;
@@ -71,13 +71,13 @@ Math.besselMean = function besselMean(vector) {
 
 Math.stdev = function standardDeviation(values){
   var avg = Math.mean(values);
-  
+
   var squareDiffs = values.map(function(value){
     var diff = value - avg;
     var sqrDiff = diff * diff;
     return sqrDiff;
   });
-  
+
   var avgSquareDiff = Math.besselMean(squareDiffs);
 
   var stdDev = Math.sqrt(avgSquareDiff);
@@ -87,34 +87,34 @@ Math.stdev = function standardDeviation(values){
 //VECTOR MATH
 
 function extractColumns(values) {
-  
+
   var col1 = [];
   var col2 = [];
-  
+
   var i = 0;
   while ( i < values.length) {
-    
+
     col1 = values.map(function(value,index) { return value[0]; });
     col2 = values.map(function(value,index) { return value[1]; });
-   
+
   i++;
   }
-  
+
   col1 = removeEmptyValues(col1);
   col2 = removeEmptyValues(col2);
-  
+
   return {
     col1: col1,
     col2: col2
   };
 }
 
-// PROPER EXTRACT COLUMNS, IF WORKS, REPLACE EXTRACTCOLUMNS WITH THIS. 
+// PROPER EXTRACT COLUMNS, IF WORKS, REPLACE EXTRACTCOLUMNS WITH THIS.
 //OKAY THIS WORKS NOW.
 function extractMultiColumns(values) {
-  
+
   var columns = [];
-  
+
   var i = 0;
   while ( i < values.length) {
      for (var j = 0; j<values[i].length; j++) {
@@ -122,8 +122,8 @@ function extractMultiColumns(values) {
      }
   i++;
   }
-  
-  
+
+
   return columns;
 }
 
@@ -145,5 +145,3 @@ var my_array = my_array.filter(function(x){
 });
   return my_array;
 }
-
-

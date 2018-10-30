@@ -1,0 +1,36 @@
+
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+
+
+<!-- Linking Stylesheet-->
+<?!= include("myStylesheet") ?>
+
+<body>
+
+  <div class="myPadding">
+
+    <a onclick="google.script.run.showSidebar()">< Back</a>
+    <h3>About</h3>
+    <p>About for UX Benchmarking</p>
+    <hr/>
+
+
+    <h3>Task Level Benchmarking</h3>
+    <p>Includes Time on task (actual and keystroke level model), Task Completion and the Single Ease Question (SEQ).</p>
+    <button class="action" title="This will open task level benchmarking options" onclick="google.script.run.launchTaskLevelBenchmark();">Task Level Benchmark</button>
+    <hr/>
+
+    <h3>Study Level Benchmarking</h3>
+    <p>Includes multiple post study questionnaires like System Usability Scale(SUS), UMUX-Lite and NPS(Net Promoter Score) as well as Microsoft's product reaction cards to measure desirability.</p>
+    <button class="action" title="This will open study level benchmarking options" onclick="google.script.run.launchStudyLevelBenchmark();">Study Level Benchmark</button>
+    <hr/>
+
+    <div class="myFooter">
+      <span class="gray">
+        Stategize.co</span>
+      </div>
+
+    </div>
+
+  </body>
