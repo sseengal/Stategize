@@ -3,27 +3,28 @@
 <!-- Linking Stylesheet-->
 <?!= include("myStylesheet") ?>
 
-
 <div class="myPadding">
-  <a onclick="google.script.run.launchFormativeTesting()">< Back</a>
+  <a onclick="google.script.run.launchSampleSizeCalculators()">< Back</a>
   <h3>About</h3>
   <p>Problem Discovery Matrix description</p>
   <hr/>
 
+ <p>Total users</p>
+  <input id="totalUsers" type="number" value=5 min=1 max=99>
 
-   <p>Total users </p>
-   <input id="totalUsers" type="number" value=5 min=1 max=99>
-
-  <p> Problems discovered </p>
+  <p>Problems discovered</p>
   <input id="problemsDiscovered" type="number" value=5 min=1 max=99>
-
   <button class="action" id="buildMatrix" onclick="buildProblemDiscoveryMatrix();">Build Matrix</button>
+  <div id="divAfterSuccessfulPDMCreation" class="block" style="display: none; visibility: hidden">
+  <p id="matrixNotify">Matrix successfully created. If a user encountered the problem enter 1 otherwise enter 0 or leave the field blank.</p>
+  <hr/>
 
+  <p>I want to discover</p>
+  <input id="problemPercent" type="number" value=80 min=1 max=99>
+  <p>% of all problems, atleast once.</p>
+  <button class="action" id="PDM" onclick="buildProblemDiscoveryMatrix();">Calculate</button>
+  </div>
 <hr/>
- <!-- <H3>Sample Size:</H3>
- <div class="block">
- <p id="testResult">Results will be displayed here</p>
- </div> -->
 
 <div class="myFooter">
   <span class="gray">
@@ -32,8 +33,6 @@
   </div>
 
 <!-- Footer -->
-
-
 
  <script type="text/javascript">
 
@@ -44,7 +43,8 @@
 
     google.script.run.withSuccessHandler(getTestSuccess).buildProblemDiscoveryMatrix(users, problems);
     function getTestSuccess(result) {
-     document.getElementById("testResult").innerHTML = result;
+     document.getElementById("divAfterSuccessfulPDMCreation").style.display = "block";
+     document.getElementById("divAfterSuccessfulPDMCreation").style.visibility = "visible";
      }
     }
 

@@ -3,7 +3,7 @@
 <!-- Linking Stylesheet-->
 <?!= include("myStylesheet") ?>
 
-  
+
 <div class="myPadding">
   <a onclick="google.script.run.showSidebar()">< Back</a>
   <h3>About</h3>
@@ -19,7 +19,7 @@
 
 
   <button class="action" id="findTestButton" onclick="calculateProblemDiscoverySampleSize()">Calculate Sample Size</button>
- 
+
 <hr/>
  <H3>Sample Size:</H3>
  <div class="block">
@@ -30,24 +30,24 @@
   <span class="gray">
     Stategize.co</span>
 </div>
-  </div> 
- 
-<!-- Footer -->  
+  </div>
+
+<!-- Footer -->
 
 
- 
+
  <script type="text/javascript">
-   
+
     function calculateProblemDiscoverySampleSize() {
-    
+
     var chanceToObserve = document.getElementById("chanceToObserve").value;
     var probabilityOfOccurrence = document.getElementById("probabilityOfOccurrence").value;
-   
+
     google.script.run.withSuccessHandler(getTestSuccess).getProblemDiscoverySampleSize(chanceToObserve, probabilityOfOccurrence);
     function getTestSuccess(result) {
      document.getElementById("testResult").innerHTML = result;
      }
     }
-    
+
 
 </script>

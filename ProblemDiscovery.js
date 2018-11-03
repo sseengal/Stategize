@@ -26,26 +26,17 @@ function buildProblemDiscoveryMatrix(users, problems) {
 
 var ss = SpreadsheetApp.getActiveSpreadsheet();
 ss.insertSheet(0);
-//ss.setActiveSheet(0);
-
 var activeSheet = ss.getActiveSheet();
 
 //Range needs to match values exactly
 
-
 var range = activeSheet.getRange(1,1,parseInt(users)+1,parseInt(problems)+1);
-
 activeSheet.setName("New Problem Discovery Matrix");
-
 range.setValues(matrix);
-
 
 }
 
 
-// [
-// ["", "Problem 1", "Problem 2", "Problem 3"],
-// ["user 1", "", "",""],
-// ["user 2", "", "",""],
-// ["user 3", "", "",""]
-// ];
+function autoPDMRange(rows, columns) {
+  return SpreadsheetApp.getActiveSheet().getRange(2,2,rows,columns);
+}

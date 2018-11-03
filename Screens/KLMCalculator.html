@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+<!-- Linking Stylesheet-->
+<?!= include("myStylesheet") ?>
+
+
+<body>
+  <div class="myPadding">
+    <a onclick="google.script.run.showSidebar()">< Back</a>
+
+
+    <h3>Map estimated time taken</h3>
+    <p>Description</p>
+    <div class="block">
+      <b>K</b>eystroke <input id="keystroke" type="number" value="0.28" onblur="validateTest()"> secs<br>
+      <b>B</b>utton <input id="button" type="number" value="0.1" onblur="validateTest()"> secs<br>
+      <b>P</b>oint <input id="point" type="number" value="1.1" onblur="validateTest()"> secs<br>
+      <b>H</b>ome <input id="home" type="number" value="0.4" onblur="validateTest()"> secs<br>
+      <b>M</b>ental <input id="mental" type="number" value="1.2" onblur="validateTest()"> secs<br>
+    </div>
+<hr/>
+    <div class="block">
+      Actions <input id="actions" type="text" value="m p bb h m kkkk" onblur="validateTest()">
+    </div>
+
+    <hr/>
+    <button title="The values input above will be used to run the test." class="action" id="runTestButton" onclick="runTest()">Run Test</button>
+    <hr/>
+
+
+
+    <div class="block">
+      <H3>Estimated Time taken:</H3>
+      <p id="testResult">result will be displayed here</p>
+    </div>
+
+
+    <div class="myFooter">
+      <span class="gray">
+        Stategize.co</span>
+      </div>
+
+    </div>
+
+  </body>
+
+  <script type="text/javascript">
+
+  var klmValues = {
+    actions: "m p bb h m kkkk",
+    k: 0.28,
+    b: 0.1,
+    p: 1.1,
+    h: 0.4,
+    m: 1.2,
+  }
+
+  function validateTest() {
+    var actions = document.getElementById("actions");
+    var k = document.getElementById("keystroke");
+    var b = document.getElementById("button");
+    var p = document.getElementById("point");
+    var h = document.getElementById("home");
+    var m = document.getElementById("mental");
+    var runTestButton = document.getElementById("runTestButton");
+
+    if (actions.value==null || actions.value=="" || k.value==null || k.value=="" || b.value==null || b.value=="" || p.value==null || p.value=="" || h.value==null || h.value=="" || m.value==null || m.value=="")
+    {
+      runTestButton.disabled=true;
+    }
+    else {
+      runTestButton.disabled=false;
+      klmValues = {
+        actions: actions.value,
+        k: k.value,
+        b: b.value,
+        p: p.value,
+        h: h.value,
+        m: m.value,
+      }
+    }
+
+  }
+
+  function runTest() {
+
+    google.script.run.withSuccessHandler(runTestSuccess).runKLMCalculator(klmValues);
+
+    function runTestSuccess(result) {
+      document.getElementById("testResult").innerHTML = "Estimated Time for the task is <b>" + result + " seconds.</b>";
+
+    }
+
+  }
+
+</script>

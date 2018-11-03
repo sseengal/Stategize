@@ -82,9 +82,6 @@ function launchProblemDiscoveryMatrix() {
       .showSidebar(html);
 }
 
-
-
-
 function launchUMUXLiteTesting() {
   var html = HtmlService.createTemplateFromFile('Screens/UMUXLiteTesting.html').evaluate()
       .setTitle('UMUX-Lite Testing')
@@ -121,15 +118,14 @@ function launchSummativeTesting() {
 
 }
 
-function launchFormativeTesting() {
-  var html = HtmlService.createTemplateFromFile('Screens/FormativeTesting.html').evaluate()
-      .setTitle('Formative Testing')
+function launchSampleSizeCalculators() {
+  var html = HtmlService.createTemplateFromFile('Screens/SampleSizeCalculators.html').evaluate()
+      .setTitle('Sample Size Calculators')
       .setWidth(300);
   SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
       .showSidebar(html);
 
 }
-
 
 function launchTaskLevelBenchmark() {
   var html = HtmlService.createTemplateFromFile('Screens/TaskLevelBenchmarking.html').evaluate()
@@ -161,6 +157,15 @@ function launchPostStudyQuestionnaires() {
 function launchPostTaskQuestionnaires() {
   var html = HtmlService.createTemplateFromFile('Screens/PostTaskQuestionnaires.html').evaluate()
       .setTitle('Post Study Questionnaires')
+      .setWidth(300);
+  SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
+      .showSidebar(html);
+
+}
+
+function launchKLMCalculator() {
+  var html = HtmlService.createTemplateFromFile('Screens/KLMCalculator.html').evaluate()
+      .setTitle('KLM Calculator')
       .setWidth(300);
   SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
       .showSidebar(html);
